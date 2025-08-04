@@ -1,15 +1,20 @@
 name: CI
-
-on:
+'on':
   pull_request:
-    branches: [ "main" ]
-
+    branches:
+    - main
+    - dev
+    - qa
+    - prod
+  push:
+    branches:
+    - main
 jobs:
   terraform-validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-      - run: terraform init
-      - run: terraform validate
+    - uses: actions/checkout@v4
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+    - run: terraform init
+    - run: terraform validate
